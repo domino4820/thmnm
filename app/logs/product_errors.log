@@ -1,0 +1,6 @@
+[2025-05-23 07:04:55] POST Data: {"name":"Laptop gaming","description":"Laptop gamingLaptop gamingLaptop gaming","price":"20000000","category_id":"2"}
+[2025-05-23 07:04:55] Image Upload Info: {"name":"818cXcaog9L.jpg","full_path":"818cXcaog9L.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php77B3.tmp","error":0,"size":262561}
+[2025-05-23 07:04:55] Image uploaded successfully: public/uploads/products/68301e171fb6c_818cXcaog9L.jpg
+[2025-05-23 07:04:55] Adding Product - Name: Laptop gaming, Description: Laptop gamingLaptop gamingLaptop gaming, Price: 20000000, Category: 2, Image: uploads/products/68301e171fb6c_818cXcaog9L.jpg
+[2025-05-23 07:05:22] Image uploaded successfully: public/uploads/products/68301e3228999_640-lamborghini-aventador-gia-bao-nhieu.jpg
+[2025-05-23 07:05:29] Image uploaded successfully: public/uploads/products/68301e39bc8fa_818cXcaog9L.jpg
