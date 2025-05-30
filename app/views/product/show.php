@@ -103,7 +103,7 @@
 
             <div class="product-actions">
                 <a href="/Product/edit/<?php echo $product->id; ?>" class="btn btn-warning">Chỉnh Sửa</a>
-                <a href="/Product" class="btn btn-secondary">Quay Lại</a>
+                <a href="http://localhost:8080/" class="btn btn-secondary">Quay Lại</a>
             </div>
         </div>
     </div>

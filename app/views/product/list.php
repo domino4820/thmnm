@@ -1,10 +1,33 @@
 <?php
-// Đảm bảo session được khởi tạo
+// Check if session is not already active before starting
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 include_once 'app/views/layout/header.php'; 
 ?>
+
+<style>
+    .gundam-card .card-img-top {
+        height: 250px;
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+    }
+
+    .product-img-container {
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .product-img-container img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+</style>
 
 <div class="row">
     <div class="col-12 mb-4">
@@ -28,15 +51,17 @@ include_once 'app/views/layout/header.php';
         <?php foreach ($products as $product): ?>
             <div class="col">
                 <div class="card h-100 gundam-card">
-                    <?php if ($product->image): ?>
-                        <img src="/public/<?php echo htmlspecialchars($product->image); ?>" 
-                             class="card-img-top" 
-                             alt="<?php echo htmlspecialchars($product->name); ?>">
-                    <?php else: ?>
-                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
-                            <i class="fas fa-robot text-muted" style="font-size: 5rem;"></i>
-                        </div>
-                    <?php endif; ?>
+                    <div class="product-img-container">
+                        <?php if ($product->image): ?>
+                            <img src="/public/<?php echo htmlspecialchars($product->image); ?>" 
+                                 class="card-img-top" 
+                                 alt="<?php echo htmlspecialchars($product->name); ?>">
+                        <?php else: ?>
+                            <div class="bg-light d-flex align-items-center justify-content-center w-100 h-100">
+                                <i class="fas fa-robot text-muted" style="font-size: 5rem;"></i>
+                            </div>
+                        <?php endif; ?>
+                    </div>
                     
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($product->name); ?></h5>

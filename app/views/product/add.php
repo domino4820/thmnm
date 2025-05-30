@@ -34,9 +34,9 @@ unset($_SESSION['errors']);
                                 <?php if(isset($errors['name'])): ?>
                                     <div class="invalid-feedback">
                                         <?php echo $errors['name']; ?>
-                                    </div>
+    </div>
                                 <?php endif; ?>
-                            </div>
+</div>
 
                             <div class="mb-3">
                                 <label for="description" class="form-label">Mô tả</label>
@@ -46,10 +46,10 @@ unset($_SESSION['errors']);
                                 <?php if(isset($errors['description'])): ?>
                                     <div class="invalid-feedback">
                                         <?php echo $errors['description']; ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-
+                </div>
+                <?php endif; ?>
+                    </div>
+                    
                             <div class="mb-3">
                                 <label for="price" class="form-label">Giá</label>
                                 <input type="number" class="form-control <?php echo isset($errors['price']) ? 'is-invalid' : ''; ?>" 
@@ -59,10 +59,10 @@ unset($_SESSION['errors']);
                                 <?php if(isset($errors['price'])): ?>
                                     <div class="invalid-feedback">
                                         <?php echo $errors['price']; ?>
-                                    </div>
+                    </div>
                                 <?php endif; ?>
-                            </div>
-
+                        </div>
+                        
                             <div class="mb-3">
                                 <label for="category_id" class="form-label">Danh mục</label>
                                 <select class="form-select <?php echo isset($errors['category_id']) ? 'is-invalid' : ''; ?>" 
@@ -73,28 +73,28 @@ unset($_SESSION['errors']);
                                             <?php echo (isset($form_data['category_id']) && $form_data['category_id'] == $category->id) ? 'selected' : ''; ?>>
                                             <?php echo htmlspecialchars($category->name); ?>
                                         </option>
-                                    <?php endforeach; ?>
-                                </select>
+                                <?php endforeach; ?>
+                            </select>
                                 <?php if(isset($errors['category_id'])): ?>
                                     <div class="invalid-feedback">
                                         <?php echo $errors['category_id']; ?>
-                                    </div>
+                        </div>
                                 <?php endif; ?>
-                            </div>
-
+                    </div>
+                    
                             <div class="mb-3">
-                                <label for="image" class="form-label">Hình ảnh</label>
+                        <label for="image" class="form-label">Hình ảnh</label>
                                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
-                            </div>
-
+                    </div>
+                    
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
-                            </div>
-                        </form>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -4,3 +4,56 @@
 [2025-05-23 07:04:55] Adding Product - Name: Laptop gaming, Description: Laptop gamingLaptop gamingLaptop gaming, Price: 20000000, Category: 2, Image: uploads/products/68301e171fb6c_818cXcaog9L.jpg
 [2025-05-23 07:05:22] Image uploaded successfully: public/uploads/products/68301e3228999_640-lamborghini-aventador-gia-bao-nhieu.jpg
 [2025-05-23 07:05:29] Image uploaded successfully: public/uploads/products/68301e39bc8fa_818cXcaog9L.jpg
+[2025-05-23 07:30:35] POST Data: {"name":"RX-78-2 Gundam","description":"Gundam huy\u1ec1n tho\u1ea1i","price":"1200000","category_id":"4"}
+[2025-05-23 07:30:35] Image Upload Info: {"name":"rx-78-2.jpg","full_path":"rx-78-2.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpF89E.tmp","error":0,"size":284410}
+[2025-05-23 07:30:35] Image uploaded successfully: public/uploads/products/6830241b6a56c_rx-78-2.jpg
+[2025-05-23 07:30:35] Adding Product - Name: RX-78-2 Gundam, Description: Gundam huyền thoại, Price: 1200000, Category: 4, Image: uploads/products/6830241b6a56c_rx-78-2.jpg
+[2025-05-23 07:46:18] ProductController Error: Không tìm thấy chức năng
+[2025-05-23 07:50:47] POST Data: {"name":"Baradox","description":"Hu\u1ef7 di\u1ec7t sao ho\u1ea3","price":"1200000","category_id":"6"}
+[2025-05-23 07:50:47] Image Upload Info: {"name":"barbatos.jpg","full_path":"barbatos.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php77DA.tmp","error":0,"size":267765}
+[2025-05-23 07:50:47] Image uploaded successfully: public/uploads/products/683028d7a24d1_barbatos.jpg
+[2025-05-23 07:50:47] Adding Product - Name: Baradox, Description: Huỷ diệt sao hoả, Price: 1200000, Category: 6, Image: uploads/products/683028d7a24d1_barbatos.jpg
+[2025-05-23 08:03:25] POST Data: {"name":"Baradox","description":"Series hu\u1ef7 di\u1ec7t sao ho\u1ea3","price":"1750000","category_id":"7"}
+[2025-05-23 08:03:25] Image Upload Info: {"name":"barbatos.jpg","full_path":"barbatos.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php7B1.tmp","error":0,"size":267765}
+[2025-05-23 08:03:25] Image uploaded successfully: public/uploads/products/68302bcd5917e_barbatos.jpg
+[2025-05-23 08:03:25] Adding Product - Name: Baradox, Description: Series huỷ diệt sao hoả, Price: 1750000, Category: 7, Image: uploads/products/68302bcd5917e_barbatos.jpg
+[2025-05-23 08:04:00] POST Data: {"name":"RX-78-2 Gundam","description":"Gundam huy\u1ec1n tho\u1ea1i","price":"7000000","category_id":"6"}
+[2025-05-23 08:04:00] Image Upload Info: {"name":"freedom.jpg","full_path":"freedom.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php92AC.tmp","error":0,"size":14735}
+[2025-05-23 08:04:00] Image uploaded successfully: public/uploads/products/68302bf0e3d28_freedom.jpg
+[2025-05-23 08:04:00] Adding Product - Name: RX-78-2 Gundam, Description: Gundam huyền thoại, Price: 7000000, Category: 6, Image: uploads/products/68302bf0e3d28_freedom.jpg
+[2025-05-23 08:05:09] POST Data: {"name":"Tri\u1ec7u V\u00e2n","description":"NMP kit ","price":"1900000","category_id":"10"}
+[2025-05-23 08:05:09] Image Upload Info: {"name":"trieuvan.jpg","full_path":"trieuvan.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php9E80.tmp","error":0,"size":9218}
+[2025-05-23 08:05:09] Product Validation Errors: {"description":"M\u00f4 t\u1ea3 ph\u1ea3i c\u00f3 \u00edt nh\u1ea5t 10 k\u00fd t\u1ef1"}
+[2025-05-23 08:05:14] POST Data: {"name":"Tri\u1ec7u V\u00e2n","description":"NMP kit Trung","price":"1900000","category_id":"10"}
+[2025-05-23 08:05:14] Image Upload Info: {"name":"","full_path":"","type":"","tmp_name":"","error":4,"size":0}
+[2025-05-23 08:05:14] Adding Product - Name: Triệu Vân, Description: NMP kit Trung, Price: 1900000, Category: 10, Image: 
+[2025-05-23 08:07:39] POST Data: {"name":"Unicorn","description":"Series huy\u1ec1n tho\u1ea1i","price":"6000000","category_id":"6"}
+[2025-05-23 08:07:39] Image Upload Info: {"name":"unicorn.jpg","full_path":"unicorn.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpE6BB.tmp","error":0,"size":174137}
+[2025-05-23 08:07:39] Image uploaded successfully: public/uploads/products/68302ccb0e559_unicorn.jpg
+[2025-05-23 08:07:39] Adding Product - Name: Unicorn, Description: Series huyền thoại, Price: 6000000, Category: 6, Image: uploads/products/68302ccb0e559_unicorn.jpg
+[2025-05-23 08:08:42] POST Data: {"name":"Tri\u1ec7u V\u00e2n","description":"NMP kit Trung","price":"2000000","category_id":"10"}
+[2025-05-23 08:08:42] Image Upload Info: {"name":"vn-11134207-7ra0g-m7qqlyr8vd6r35.jpg","full_path":"vn-11134207-7ra0g-m7qqlyr8vd6r35.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpDD03.tmp","error":0,"size":275397}
+[2025-05-23 08:08:42] Image uploaded successfully: public/uploads/products/68302d0a1af8a_vn-11134207-7ra0g-m7qqlyr8vd6r35.jpg
+[2025-05-23 08:08:42] Adding Product - Name: Triệu Vân, Description: NMP kit Trung, Price: 2000000, Category: 10, Image: uploads/products/68302d0a1af8a_vn-11134207-7ra0g-m7qqlyr8vd6r35.jpg
+[2025-05-23 08:09:11] Image uploaded successfully: public/uploads/products/68302d2798c14_rx-78-2.jpg
+[2025-05-23 08:11:03] POST Data: {"name":"Nemesis","description":"RT002-Nemesis","price":"2400000","category_id":"7"}
+[2025-05-23 08:11:03] Image Upload Info: {"name":"sg-11134201-7ra1a-m4u9quo2wcsg88.jpg","full_path":"sg-11134201-7ra1a-m4u9quo2wcsg88.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php40C.tmp","error":0,"size":211340}
+[2025-05-23 08:11:03] Image uploaded successfully: public/uploads/products/68302d972b160_sg-11134201-7ra1a-m4u9quo2wcsg88.jpg
+[2025-05-23 08:11:03] Adding Product - Name: Nemesis, Description: RT002-Nemesis, Price: 2400000, Category: 7, Image: uploads/products/68302d972b160_sg-11134201-7ra1a-m4u9quo2wcsg88.jpg
+[2025-05-23 08:12:52] POST Data: {"name":"Skydefender","description":"Hu\u1ef7 di\u1ec7t b\u1ea7u tr\u1eddi","price":"2890000","category_id":"8"}
+[2025-05-23 08:12:52] Image Upload Info: {"name":"cccfe5d1db5bc17b9700167db6c4367a.jpg_720x720q80.jpg","full_path":"cccfe5d1db5bc17b9700167db6c4367a.jpg_720x720q80.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpAF3C.tmp","error":0,"size":81056}
+[2025-05-23 08:12:52] Image uploaded successfully: public/uploads/products/68302e04805f7_cccfe5d1db5bc17b9700167db6c4367a.jpg_720x720q80.jpg
+[2025-05-23 08:12:52] Adding Product - Name: Skydefender, Description: Huỷ diệt bầu trời, Price: 2890000, Category: 8, Image: uploads/products/68302e04805f7_cccfe5d1db5bc17b9700167db6c4367a.jpg_720x720q80.jpg
+[2025-05-23 08:53:38] POST Data: {"name":"Fire Lord","description":"Chi\u1ebfn binh hi\u1ec7u \u1ee9ng","price":"700000","category_id":"7"}
+[2025-05-23 08:53:38] Image Upload Info: {"name":"SNAA-YR-04-FIRE-LORD-AZGUNDAM-1.jpg","full_path":"SNAA-YR-04-FIRE-LORD-AZGUNDAM-1.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\php289.tmp","error":0,"size":69956}
+[2025-05-23 08:53:38] Image uploaded successfully: public/uploads/products/68303792a7742_SNAA-YR-04-FIRE-LORD-AZGUNDAM-1.jpg
+[2025-05-23 08:53:38] Adding Product - Name: Fire Lord, Description: Chiến binh hiệu ứng, Price: 700000, Category: 7, Image: uploads/products/68303792a7742_SNAA-YR-04-FIRE-LORD-AZGUNDAM-1.jpg
+[2025-05-23 08:54:19] POST Data: {"name":"Lone Shadow","description":"Lone Shadow","price":"900000","category_id":"7"}
+[2025-05-23 08:54:19] Image Upload Info: {"name":"Lone Shadow (4).jpg","full_path":"Lone Shadow (4).jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpA16A.tmp","error":0,"size":507868}
+[2025-05-23 08:54:19] Image uploaded successfully: public/uploads/products/683037bb57683_Lone Shadow (4).jpg
+[2025-05-23 08:54:19] Adding Product - Name: Lone Shadow, Description: Lone Shadow, Price: 900000, Category: 7, Image: uploads/products/683037bb57683_Lone Shadow (4).jpg
+[2025-05-23 08:55:32] POST Data: {"name":"Aries","description":"Aries huy\u1ec1n tho\u1ea1i","price":"9000000","category_id":"8"}
+[2025-05-23 08:55:32] Image Upload Info: {"name":"bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg","full_path":"bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg","type":"image\/jpeg","tmp_name":"C:\\Users\\Administrator\\AppData\\Local\\Temp\\phpBD3C.tmp","error":0,"size":117111}
+[2025-05-23 08:55:32] Image uploaded successfully: public/uploads/products/683038040560f_bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg
+[2025-05-23 08:55:32] Adding Product - Name: Aries, Description: Aries huyền thoại, Price: 9000000, Category: 8, Image: uploads/products/683038040560f_bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg
+[2025-05-23 08:57:33] Image uploaded successfully: public/uploads/products/6830387de2268_sg-11134201-7reo2-m84z84c3sejmb0.jpg

@@ -348,13 +348,19 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="/projectbanhang/Product/"><i class="fas fa-list me-1"></i> Danh sách sản phẩm</a>
+                        <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/Home') !== false) ? 'active' : ''; ?>" href="/">
+                            <i class="fas fa-home"></i> Trang Chủ
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projectbanhang/Product/add"><i class="fas fa-plus me-1"></i> Thêm sản phẩm</a>
+                        <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/Category') !== false) ? 'active' : ''; ?>" href="/Category/list">
+                            <i class="fas fa-list"></i> Danh Mục
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/projectbanhang/Category/list"><i class="fas fa-tag me-1"></i> Danh mục</a>
+                        <a class="nav-link <?php echo (strpos($_SERVER['REQUEST_URI'], '/Product') !== false) ? 'active' : ''; ?>" href="/Product/list">
+                            <i class="fas fa-box"></i> Sản Phẩm
+                        </a>
                     </li>
                 </ul>
             </div>

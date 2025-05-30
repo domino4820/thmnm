@@ -73,63 +73,63 @@
             }
             unset($_SESSION['errors']); // Xóa thông báo sau khi hiển thị
             ?>
-        </div>
-    <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
 
     <form action="/Product/update" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($product->id); ?>">
         <input type="hidden" name="existing_image" value="<?php echo htmlspecialchars($product->image ?? ''); ?>">
 
-        <div class="form-group">
+    <div class="form-group">
             <label for="name">Tên Sản Phẩm *</label>
             <input type="text" id="name" name="name" 
                    value="<?php echo htmlspecialchars($_SESSION['form_data']['name'] ?? $product->name); ?>" 
                    required>
-        </div>
+                        </div>
 
-        <div class="form-group">
+    <div class="form-group">
             <label for="description">Mô Tả *</label>
             <textarea id="description" name="description" rows="4" required><?php 
                 echo htmlspecialchars($_SESSION['form_data']['description'] ?? $product->description); 
             ?></textarea>
-        </div>
+                        </div>
 
-        <div class="form-group">
+    <div class="form-group">
             <label for="price">Giá *</label>
             <input type="number" id="price" name="price" min="0" step="1000" 
                    value="<?php echo htmlspecialchars($_SESSION['form_data']['price'] ?? $product->price); ?>" 
                    required>
-        </div>
+                        </div>
 
-        <div class="form-group">
+    <div class="form-group">
             <label for="category_id">Danh Mục</label>
             <select id="category_id" name="category_id">
                 <option value="">Chọn Danh Mục</option>
-                <?php foreach ($categories as $category): ?>
+            <?php foreach ($categories as $category): ?>
                     <option value="<?php echo $category->id; ?>" 
                         <?php 
                         $selectedCategory = $_SESSION['form_data']['category_id'] ?? $product->category_id;
                         echo ($selectedCategory == $category->id) ? 'selected' : ''; 
                         ?>>
                         <?php echo htmlspecialchars($category->name); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select>
-        </div>
+            </option>
+            <?php endforeach; ?>
+        </select>
+                        </div>
 
-        <div class="form-group">
+    <div class="form-group">
             <label for="image">Hình Ảnh</label>
-            <?php if ($product->image): ?>
+        <?php if ($product->image): ?>
                 <div>
                     <img src="/public/<?php echo htmlspecialchars($product->image); ?>"
                          alt="Hình ảnh hiện tại" class="existing-image">
-                </div>
-            <?php endif; ?>
-            <input type="file" id="image" name="image" accept="image/*">
         </div>
+        <?php endif; ?>
+            <input type="file" id="image" name="image" accept="image/*">
+    </div>
 
         <button type="submit" class="btn">Cập Nhật Sản Phẩm</button>
-    </form>
+</form>
 
     <?php 
     // Xóa dữ liệu form đã lưu sau khi sử dụng

@@ -237,6 +237,22 @@ class ProductModel
             throw new Exception('Không thể xóa sản phẩm. Vui lòng thử lại.');
         }
     }
+
+    public function getFeaturedProducts($limit = 6)
+    {
+        // Retrieve featured products, typically the newest or most viewed products
+        $query = "SELECT p.id, p.name, p.description, p.price, p.image, p.category_id, c.name as category_name
+                  FROM " . $this->table_name . " p
+                  LEFT JOIN category c ON p.category_id = c.id
+                  ORDER BY p.id DESC  
+                  LIMIT :limit";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 }
 
 ?>
