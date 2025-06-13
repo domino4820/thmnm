@@ -1,110 +1,75 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title>Chỉnh Sửa Sản Phẩm</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input, textarea, select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .error {
-            color: #dc3545;
-            font-size: 0.9em;
-            margin-top: 5px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background-color: #0056b3;
-        }
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        .alert-error {
-            background-color: #f2dede;
-            color: #a94442;
-            border: 1px solid #ebccd1;
-        }
-        .existing-image {
-            max-width: 200px;
-            margin-bottom: 10px;
-            border-radius: 4px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Chỉnh Sửa Sản Phẩm</h1>
-
     <?php 
-    // Hiển thị thông báo lỗi từ session
-    if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])): ?>
-        <div class="alert alert-error">
-            <?php 
-            foreach ($_SESSION['errors'] as $error) {
-                echo htmlspecialchars($error) . "<br>";
-            }
-            unset($_SESSION['errors']); // Xóa thông báo sau khi hiển thị
-            ?>
+include_once 'app/views/layout/header.php';
+require_once 'app/helpers/SessionHelper.php';
+require_once 'app/helpers/UrlHelper.php';
+
+// Đảm bảo quyền quản lý sản phẩm
+SessionHelper::requireProductManager();
+?>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0"><i class="fas fa-edit me-2"></i> Chỉnh sửa sản phẩm</h4>
+                </div>
+                <div class="card-body">
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show">
+                            <i class="fas fa-check-circle me-2"></i> <?php echo $_SESSION['success']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                         </div>
+                        <?php unset($_SESSION['success']); ?>
+                    <?php endif; ?>
+                    
+                    <?php if (isset($_SESSION['errors']) && is_array($_SESSION['errors'])): ?>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <ul class="mb-0">
+                                <?php foreach ($_SESSION['errors'] as $error): ?>
+                                    <li><?php echo htmlspecialchars($error); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <?php unset($_SESSION['errors']); ?>
                     <?php endif; ?>
 
-    <form action="/Product/update" method="post" enctype="multipart/form-data">
+                    <form action="<?= UrlHelper::url('Product/update') ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?php echo htmlspecialchars($product->id); ?>">
         <input type="hidden" name="existing_image" value="<?php echo htmlspecialchars($product->image ?? ''); ?>">
 
-    <div class="form-group">
-            <label for="name">Tên Sản Phẩm *</label>
-            <input type="text" id="name" name="name" 
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="name" name="name" 
                    value="<?php echo htmlspecialchars($_SESSION['form_data']['name'] ?? $product->name); ?>" 
                    required>
                         </div>
 
-    <div class="form-group">
-            <label for="description">Mô Tả *</label>
-            <textarea id="description" name="description" rows="4" required><?php 
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Mô tả <span class="text-danger">*</span></label>
+                            <textarea class="form-control" id="description" name="description" rows="4" required><?php 
                 echo htmlspecialchars($_SESSION['form_data']['description'] ?? $product->description); 
             ?></textarea>
                         </div>
 
-    <div class="form-group">
-            <label for="price">Giá *</label>
-            <input type="number" id="price" name="price" min="0" step="1000" 
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Giá <span class="text-danger">*</span></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="price" name="price" min="0" step="1000" 
                    value="<?php echo htmlspecialchars($_SESSION['form_data']['price'] ?? $product->price); ?>" 
                    required>
+                                        <span class="input-group-text">VNĐ</span>
+                                    </div>
+                                </div>
                         </div>
-
-    <div class="form-group">
-            <label for="category_id">Danh Mục</label>
-            <select id="category_id" name="category_id">
-                <option value="">Chọn Danh Mục</option>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="category_id" class="form-label">Danh mục <span class="text-danger">*</span></label>
+                                    <select class="form-select" id="category_id" name="category_id" required>
+                                        <option value="">Chọn danh mục</option>
             <?php foreach ($categories as $category): ?>
                     <option value="<?php echo $category->id; ?>" 
                         <?php 
@@ -115,27 +80,42 @@
             </option>
             <?php endforeach; ?>
         </select>
+                                </div>
+                            </div>
                         </div>
 
-    <div class="form-group">
-            <label for="image">Hình Ảnh</label>
-        <?php if ($product->image): ?>
-                <div>
-                    <img src="/public/<?php echo htmlspecialchars($product->image); ?>"
-                         alt="Hình ảnh hiện tại" class="existing-image">
-        </div>
-        <?php endif; ?>
-            <input type="file" id="image" name="image" accept="image/*">
-    </div>
+                        <div class="mb-4">
+                            <label for="image" class="form-label">Hình ảnh sản phẩm</label>
+                            <?php if (!empty($product->image)): ?>
+                                <div class="mb-2">
+                                    <img src="<?= UrlHelper::url($product->image) ?>" 
+                                         alt="Hình ảnh hiện tại" class="img-thumbnail" style="max-height: 150px;">
+                                </div>
+                            <?php endif; ?>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <div class="form-text">Để trống nếu không muốn thay đổi hình ảnh</div>
+                        </div>
 
-        <button type="submit" class="btn">Cập Nhật Sản Phẩm</button>
-</form>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="fas fa-save me-2"></i> Cập nhật sản phẩm
+                            </button>
+                            <a href="<?= UrlHelper::url('Product/list') ?>" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Quay lại
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <?php 
     // Xóa dữ liệu form đã lưu sau khi sử dụng
     if (isset($_SESSION['form_data'])) {
         unset($_SESSION['form_data']);
     }
+
+include_once 'app/views/layout/footer.php'; 
     ?>
-</body>
-</html>

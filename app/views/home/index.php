@@ -12,286 +12,583 @@ require_once('app/models/ProductModel.php');
 $db = (new Database())->getConnection();
 $categoryModel = new CategoryModel($db);
 $productModel = new ProductModel($db);
-$categories = $categoryModel->getCategories();
-$featuredProducts = $productModel->getFeaturedProducts(9); // Change limit to 9
+
+// Load manually if no categories
+if (!$categoryModel->getCategories()) {
+    $manualCategories = [
+        (object)['id' => 1, 'name' => 'Perfect Grade (PG)', 'image' => 'PG.jpg'],
+        (object)['id' => 2, 'name' => 'High Grade (HG)', 'image' => 'HG.jpg'],
+        (object)['id' => 3, 'name' => 'SD', 'image' => 'sd.jpg'],
+        (object)['id' => 4, 'name' => 'Freedom Strike', 'image' => 'FREEDOM_STRVE.jpg'],
+    ];
+    $categories = $manualCategories;
+} else {
+    $categories = $categoryModel->getCategories();
+}
+
+// Get featured products
+$featuredProducts = $productModel->getFeaturedProducts(6);
+if (empty($featuredProducts)) {
+    $featuredProducts = $productModel->getProducts(6);
+}
 ?>
 
 <style>
-    /* Banner Redesign */
-    .banner-section {
-        position: relative;
-        background-color: #000033;
-        overflow: hidden;
-        color: white;
-        margin-bottom: 30px;
-        min-height: 400px;
+    /* Google Font Import */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f8f9fa;
     }
 
-    .banner-background {
+    /* Hero Section Styles */
+    .hero-section {
+        position: relative;
+        background: linear-gradient(135deg, #050c2c 0%, #1e3799 100%);
+        color: white;
+        overflow: hidden;
+        border-radius: 0;
+        margin-top: -1.5rem;
+        height: 500px;
+        display: flex;
+        align-items: center;
+    }
+
+    .hero-background {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/public/uploads/banner-gundam.jpg');
-        background-position: center center;
+        background-image: url('<?= UrlHelper::asset('uploads/banner-gundam.jpg') ?>');
+        background-position: center;
         background-size: cover;
-        opacity: 0.5;
+        opacity: 0.35;
         z-index: 1;
     }
 
-    .banner-content {
+    .hero-content {
         position: relative;
         z-index: 2;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 400px;
-        padding: 20px;
-        text-align: center;
+        padding: 0 15px;
     }
 
-    .banner-text {
-        position: relative;
-        z-index: 3;
-        max-width: 700px;
-        margin: 0 auto;
-        text-align: center;
-        background-color: rgba(0,0,0,0.5);
-        padding: 30px;
-        border-radius: 15px;
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -0.5px;
     }
 
-    .banner-title {
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    }
-
-    .banner-subtitle {
+    .hero-subtitle {
         font-size: 1.2rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
+        margin-bottom: 2rem;
+        font-weight: 300;
+        max-width: 600px;
+        line-height: 1.8;
     }
 
-    .banner-cta {
-        display: inline-block;
-        padding: 12px 30px;
-        font-size: 1.1rem;
-        background-color: #4a6cf7;
+    .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
         color: white;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 1.1rem;
         text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 20px rgba(0, 242, 254, 0.3);
+    }
+
+    .hero-cta:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 242, 254, 0.4);
+        color: white;
+    }
+
+    /* Category Section */
+    .section-title {
+        position: relative;
+        margin-bottom: 2rem;
+        font-weight: 700;
+        color: #333;
+        padding-bottom: 10px;
+    }
+
+    .section-title:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        border-radius: 2px;
+    }
+
+    .section-title.text-center:after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .category-card {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 1.5rem;
+        cursor: pointer;
+        height: 180px;
+    }
+    
+    .category-card .image-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .category-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.5s ease;
+    }
+    
+    .category-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .category-card:hover img {
+        transform: scale(1.1);
+    }
+    
+    .category-card-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+        z-index: 1;
+    }
+
+    .category-card-title {
+        color: white;
+        font-weight: 600;
+        margin: 0;
+        font-size: 1.2rem;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    }
+
+    /* Featured Products */
+    .product-section {
+        background-color: #f8f9fa;
+        padding: 3rem 0;
+        margin: 3rem 0;
+        border-radius: 20px;
+    }
+
+    .product-card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+        height: 100%;
+        background-color: white;
+    }
+
+    .product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+
+    .product-image-container {
+        height: 220px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .product-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-image {
+        transform: scale(1.05);
+    }
+
+    .product-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        font-weight: 500;
+        padding: 5px 15px;
+        border-radius: 30px;
+        font-size: 0.8rem;
+        z-index: 2;
+    }
+
+    .product-title {
+        font-weight: 600;
+        font-size: 1.1rem;
+        margin-top: 1rem;
+        color: #333;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .product-price {
+        font-weight: 700;
+        color: #4facfe;
+        font-size: 1.3rem;
+    }
+
+    .btn-view {
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 8px 20px;
         border-radius: 50px;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 20px rgba(74,108,247,0.3);
     }
 
-    .banner-cta:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 25px rgba(74,108,247,0.4);
-    }
-
-    @media (max-width: 768px) {
-        .banner-title {
-            font-size: 2rem;
-        }
-
-        .banner-subtitle {
-            font-size: 1rem;
-        }
-
-        .banner-text {
-            padding: 20px;
-        }
-    }
-
-    /* Product Card Category Badge */
-    .product-category-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #4a6cf7;
+    .btn-view:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
         color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.8rem;
-        z-index: 10;
     }
-
-    .gundam-card {
+    
+    /* Testimonials Styles */
+    .testimonials-section {
+        padding: 5rem 0;
+        background-color: #fff;
+    }
+    
+    .testimonial-card {
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
         position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border: 1px solid rgba(0,0,0,0.1);
     }
-
-    .gundam-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 25px rgba(0,0,0,0.1);
-    }
-
-    .product-img-container {
-        height: 250px;
-        overflow: hidden;
-        display: flex;
-        align-items: flex-start; /* Changed to top alignment */
-        justify-content: center;
-    }
-
-    .product-img-container img {
-        width: 100%;
-        object-fit: cover;
-        object-position: top; /* Ensure image starts from top */
-    }
-
-    .category-list {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 20px;
-    }
-
-    .category-badge {
-        margin: 5px;
-        background-color: #4a6cf7;
-        color: white;
-    }
-
-    /* Responsive Grid for Featured Products */
-    .featured-products {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
-    @media (max-width: 992px) {
-        .featured-products {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .featured-products {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    /* Product Card Styles */
-    .product-card-badge {
+    
+    .testimonial-card:before {
+        content: "\201C";
         position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 10;
-        background-color: #4a6cf7;
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.8rem;
+        top: 20px;
+        left: 20px;
+        font-size: 5rem;
+        font-family: Georgia, serif;
+        color: rgba(79, 172, 254, 0.1);
+        line-height: 0;
     }
-
-    .product-card-image {
-        height: 250px;
+    
+    .testimonial-content {
+        padding-top: 30px;
+        font-style: italic;
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+    
+    .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
         object-fit: cover;
-        width: 100%;
+        margin-right: 15px;
+        border: 3px solid #f0f0f0;
+    }
+    
+    .testimonial-info h5 {
+        margin: 0;
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .testimonial-info span {
+        font-size: 0.85rem;
+        color: #777;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #050c2c 0%, #1e3799 100%);
+        color: white;
+        text-align: center;
+    }
+    
+    .stats-card {
+        padding: 1.5rem;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .stats-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .stats-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #4facfe;
+    }
+    
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        background: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    .stats-text {
+        font-size: 1.1rem;
+        opacity: 0.9;
     }
 </style>
 
-<!-- Banner Section -->
-<div class="banner-section scroll-reveal">
-    <div class="banner-background"></div>
-    <div class="banner-content">
-        <div class="banner-text">
-            <h1 class="banner-title">Thế Giới Gundam</h1>
-            <p class="banner-subtitle">
-                Khám phá bộ sưu tập mô hình Gundam độc đáo và chất lượng cao. 
-                Những mô hình chi tiết, đam mê chân thực từng chi tiết.
-            </p>
-            <a href="/Product" class="banner-cta">
-                <i class="fas fa-robot"></i> Khám Phá Ngay
+<!-- Hero Section with Banner -->
+<div class="hero-section">
+    <div class="hero-background"></div>
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Gundam Store <br>Mô hình Gunpla chính hãng</h1>
+                    <p class="hero-subtitle">Cửa hàng chuyên cung cấp các mô hình Gundam chính hãng, đa dạng mẫu mã và phụ kiện. Sẵn sàng phục vụ nhu cầu sưu tầm của bạn.</p>
+                    <a href="<?= UrlHelper::url('Product') ?>" class="hero-cta">
+                        Xem sản phẩm <i class="fas fa-arrow-right ms-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Category Section -->
+<div class="container-fluid mt-5">
+    <h2 class="section-title">Danh mục sản phẩm</h2>
+    <div class="row">
+        <?php foreach($categories as $category): ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <a href="<?= UrlHelper::url('Product?category_id='.$category->id) ?>" class="text-decoration-none">
+                    <div class="category-card">
+                        <div class="image-container">
+                            <?php
+                            $imagePath = 'uploads/categories/'.(!empty($category->image) ? $category->image : 'placeholder-category.jpg');
+                            // Kiểm tra nếu file NMP thì sử dụng thư mục products
+                            if (strpos($category->image, '68301e39bc8fa_818cXcaog9L.jpg') !== false) {
+                                $imagePath = 'uploads/products/68301e39bc8fa_818cXcaog9L.jpg';
+                            }
+                            ?>
+                            <img src="<?= UrlHelper::asset($imagePath) ?>" 
+                                 alt="<?= htmlspecialchars($category->name) ?>"
+                                 onerror="this.src='<?= UrlHelper::asset('uploads/placeholder-category.jpg') ?>'">
+                        </div>
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title"><?= htmlspecialchars($category->name) ?></h3>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<!-- "Xem Thêm Danh Mục" -->
+<div class="container-fluid text-center mb-5">
+    <a href="<?= UrlHelper::url('Product') ?>" class="btn btn-outline-primary">
+        Xem Thêm Danh Mục <i class="fas fa-arrow-right ms-2"></i>
+    </a>
+</div>
+
+<!-- Featured Products Section -->
+<div class="container-fluid product-section">
+    <div class="container-fluid">
+        <h2 class="section-title text-center">Sản phẩm nổi bật</h2>
+        <p class="text-center mb-4 text-muted">Khám phá những mô hình được yêu thích nhất tại cửa hàng</p>
+        
+        <div class="row">
+            <?php if (empty($featuredProducts)): ?>
+                <div class="col-12 text-center">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i> Hiện chưa có sản phẩm nào.
+                    </div>
+                </div>
+            <?php else: ?>
+                <?php foreach($featuredProducts as $product): ?>
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="product-card h-100">
+                            <div class="product-image-container">
+                                <img src="<?= UrlHelper::asset((!empty($product->image) ? $product->image : 'uploads/products/default.jpg')) ?>" 
+                                     class="product-image" alt="<?= htmlspecialchars($product->name) ?>"
+                                     onerror="this.src='<?= UrlHelper::asset('uploads/products/default.jpg') ?>'">
+                                <?php if (isset($product->category_name)): ?>
+                                    <div class="product-badge"><?= htmlspecialchars($product->category_name) ?></div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="product-title"><?= htmlspecialchars($product->name) ?></h5>
+                                <div class="mt-auto pt-3">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="product-price"><?= number_format($product->price, 0, ',', '.') ?> ₫</span>
+                                        <a href="<?= UrlHelper::url('Product/show/'.$product->id) ?>" class="btn btn-view">
+                                            <i class="fas fa-eye me-1"></i> Chi tiết
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="<?= UrlHelper::url('Product') ?>" class="btn btn-lg btn-primary">
+                <i class="fas fa-th-list me-2"></i> Xem tất cả sản phẩm
             </a>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <!-- Category Section -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <div class="category-list text-center">
-                <h4 class="mb-3">Danh Mục Sản Phẩm</h4>
-                <?php foreach ($categories as $category): ?>
-                    <span class="badge category-badge">
-                        <?php echo htmlspecialchars($category->name); ?>
-                    </span>
-                <?php endforeach; ?>
-            </div>
-        </div>
-    </div>
-
-    <!-- Featured Products Section -->
-    <div class="row scroll-reveal">
-        <div class="col-12 text-center mb-4">
-            <h2>Mô Hình Nổi Bật</h2>
-            <p class="text-muted">Những mô hình Gundam mới nhất và được yêu thích nhất</p>
-        </div>
-    </div>
-
-    <div class="featured-products scroll-reveal">
-        <?php if (empty($featuredProducts)): ?>
-            <div class="col-12">
-                <div class="alert alert-info text-center" role="alert">
-                    <i class="fas fa-robot"></i> Chưa có mô hình Gundam nào
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="container-fluid">
+        <h2 class="section-title text-center text-white mb-5">Gundam Store bằng con số</h2>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="stats-number">500+</div>
+                    <div class="stats-text">Mô hình Gundam</div>
                 </div>
             </div>
-        <?php else: ?>
-            <?php foreach ($featuredProducts as $product): ?>
-                <div class="card h-100 gundam-card position-relative">
-                    <?php 
-                    // Find category for this product
-                    $productCategory = null;
-                    foreach ($categories as $category) {
-                        if ($category->id == $product->category_id) {
-                            $productCategory = $category;
-                            break;
-                        }
-                    }
-                    ?>
-                    
-                    <?php if ($productCategory): ?>
-                        <span class="product-card-badge">
-                            <?php echo htmlspecialchars($productCategory->name); ?>
-                        </span>
-                    <?php endif; ?>
-
-                    <div class="product-img-container">
-                        <?php if ($product->image): ?>
-                            <img src="/public/<?php echo htmlspecialchars($product->image); ?>" 
-                                 class="card-img-top product-card-image" 
-                                 alt="<?php echo htmlspecialchars($product->name); ?>">
-                        <?php else: ?>
-                            <div class="bg-light d-flex align-items-center justify-content-center w-100 h-100">
-                                <i class="fas fa-robot text-muted" style="font-size: 5rem;"></i>
-                            </div>
-                        <?php endif; ?>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    
-                    <div class="card-body">
-                        <h5 class="card-title"><?php echo htmlspecialchars($product->name); ?></h5>
-                        <p class="card-text text-muted mb-3">
-                            <?php echo htmlspecialchars(substr($product->description, 0, 100) . '...'); ?>
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <span class="h5 text-primary mb-0">
-                                <?php echo number_format($product->price, 0, ',', '.') . ' VNĐ'; ?>
-                            </span>
-                            <a href="/Product/show/<?php echo $product->id; ?>" class="btn btn-sm btn-outline-primary">
-                                <i class="fas fa-eye"></i> Chi Tiết
-                            </a>
+                    <div class="stats-number">1000+</div>
+                    <div class="stats-text">Khách hàng hài lòng</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <div class="stats-number">63/63</div>
+                    <div class="stats-text">Tỉnh thành giao hàng</div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card">
+                    <div class="stats-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stats-number">4.9/5</div>
+                    <div class="stats-text">Đánh giá trung bình</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="testimonials-section">
+    <div class="container">
+        <h2 class="section-title text-center mb-5">Khách hàng nói gì về chúng tôi</h2>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Tôi rất hài lòng với chất lượng mô hình Gundam tại đây. Sản phẩm chính hãng, đóng gói cẩn thận và giao hàng nhanh chóng. Nhân viên tư vấn rất nhiệt tình và am hiểu sản phẩm.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Nguyễn Văn A" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>Nguyễn Văn A</h5>
+                            <span>Khách hàng thường xuyên</span>
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        <?php endif; ?>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Shop có đa dạng các loại mô hình từ HG, RG đến PG, giá cả hợp lý hơn so với thị trường. Đặc biệt là dịch vụ bảo hành và hỗ trợ sau bán hàng rất tốt. Sẽ ủng hộ shop dài lâu!
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Trần Thị B" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>Trần Thị B</h5>
+                            <span>Nhà sưu tập Gundam</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        Lần đầu mua Gundam tại shop và cực kỳ ấn tượng. Đặt hàng online rất dễ dàng, thanh toán tiện lợi và nhận được hàng chỉ sau 2 ngày. Mô hình đẹp và chính xác như mô tả trên website.
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/62.jpg" alt="Lê Văn C" class="testimonial-avatar">
+                        <div class="testimonial-info">
+                            <h5>Lê Văn C</h5>
+                            <span>Khách hàng mới</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+            <h2 class="mb-4">Khám phá thế giới Gundam ngay hôm nay</h2>
+            <p class="lead mb-4">Sưu tầm ngay những mô hình Gundam chất lượng cao với giá cả hợp lý</p>
+            <a href="<?= UrlHelper::url('Product') ?>" class="btn btn-lg btn-primary">Mua sắm ngay</a>
+        </div>
     </div>
 </div>
 

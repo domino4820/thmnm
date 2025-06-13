@@ -10,16 +10,40 @@ class ProductModel
         $this->conn = $db;
     }
 
-    public function getProducts($limit = 100, $offset = 0)
+    public function getProducts($limit = 100, $offset = 0, $categoryId = null, $search = null)
     {
         $query = "SELECT p.id, p.name, p.description, p.price, p.image, c.name as category_name
         FROM " . $this->table_name . " p
         LEFT JOIN category c ON p.category_id = c.id
-        LIMIT :limit OFFSET :offset";
+        WHERE 1=1";
+        
+        $params = [];
+        
+        // Add category filter condition if provided
+        if ($categoryId) {
+            $query .= " AND p.category_id = :category_id";
+            $params[':category_id'] = $categoryId;
+        }
+        
+        // Add search condition if provided
+        if ($search) {
+            $query .= " AND (p.name LIKE :search OR p.description LIKE :search)";
+            $params[':search'] = "%" . $search . "%";
+        }
+        
+        // Add limit and offset
+        $query .= " ORDER BY p.id DESC LIMIT :limit OFFSET :offset";
 
         $stmt = $this->conn->prepare($query);
+        
+        // Bind all parameters
+        foreach ($params as $param => $value) {
+            $stmt->bindValue($param, $value);
+        }
+        
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
@@ -252,6 +276,79 @@ class ProductModel
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
         return $result;
+    }
+
+    // Method to search for orders by customer info or order ID
+    public function searchOrders($searchTerm)
+    {
+        // Check if the search term is numeric and might be an order ID
+        if (is_numeric($searchTerm) && intval($searchTerm) > 0) {
+            // First try exact match for order ID
+            $exactQuery = "SELECT o.id, o.customer_name, o.customer_email, o.customer_phone, 
+                          o.customer_address, o.order_date, o.total_amount
+                          FROM orders o
+                          WHERE o.id = :exact_id
+                          LIMIT 1";
+                          
+            $stmt = $this->conn->prepare($exactQuery);
+            $exactId = intval($searchTerm);
+            $stmt->bindParam(':exact_id', $exactId, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+            if (!empty($result)) {
+                return $result;
+            }
+        }
+        
+        // If exact match not found or search term is not numeric, use LIKE for other fields
+        $query = "SELECT o.id, o.customer_name, o.customer_email, o.customer_phone, 
+                 o.customer_address, o.order_date, o.total_amount
+                 FROM orders o
+                 WHERE o.customer_name LIKE :search 
+                 OR o.customer_email LIKE :search
+                 OR o.customer_phone LIKE :search
+                 ORDER BY o.order_date DESC
+                 LIMIT 50";
+                 
+        $search = "%" . $searchTerm . "%";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':search', $search);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+    
+    // Method to count products for pagination
+    public function countProducts($categoryId = null, $search = null)
+    {
+        $query = "SELECT COUNT(*) as total FROM " . $this->table_name . " p WHERE 1=1";
+        
+        $params = [];
+        
+        // Add category filter condition if provided
+        if ($categoryId) {
+            $query .= " AND p.category_id = :category_id";
+            $params[':category_id'] = $categoryId;
+        }
+        
+        // Add search condition if provided
+        if ($search) {
+            $query .= " AND (p.name LIKE :search OR p.description LIKE :search)";
+            $params[':search'] = "%" . $search . "%";
+        }
+
+        $stmt = $this->conn->prepare($query);
+        
+        // Bind all parameters
+        foreach ($params as $param => $value) {
+            $stmt->bindValue($param, $value);
+        }
+        
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $row['total'] ?? 0;
     }
 }
 

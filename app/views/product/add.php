@@ -1,4 +1,11 @@
 <?php
+include_once 'app/views/layout/header.php';
+require_once 'app/helpers/SessionHelper.php';
+require_once 'app/helpers/UrlHelper.php';
+
+// Đảm bảo quyền quản lý sản phẩm
+SessionHelper::requireProductManager();
+
 // Lấy dữ liệu form từ session nếu có lỗi
 $form_data = $_SESSION['form_data'] ?? [];
 $errors = $_SESSION['errors'] ?? [];
@@ -8,25 +15,33 @@ unset($_SESSION['form_data']);
 unset($_SESSION['errors']);
 ?>
 
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <title><?php echo $pageTitle; ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container mt-5">
+<div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        <h3 class="mb-0"><?php echo $pageTitle; ?></h3>
+            <div class="card shadow-lg">
+                <div class="card-header bg-white">
+                    <h4 class="mb-0"><i class="fas fa-box-open me-2"></i> Thêm sản phẩm mới</h4>
                     </div>
                     <div class="card-body">
-                        <form action="/Product/save" method="POST" enctype="multipart/form-data">
+                    <?php if (isset($_SESSION['success'])): ?>
+                        <div class="alert alert-success alert-dismissible fade show">
+                            <i class="fas fa-check-circle me-2"></i> <?php echo $_SESSION['success']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <?php unset($_SESSION['success']); ?>
+                    <?php endif; ?>
+                    
+                    <?php if (isset($_SESSION['error'])): ?>
+                        <div class="alert alert-danger alert-dismissible fade show">
+                            <i class="fas fa-exclamation-circle me-2"></i> <?php echo $_SESSION['error']; ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                        <?php unset($_SESSION['error']); ?>
+                    <?php endif; ?>
+                    
+                    <form action="<?= UrlHelper::url('Product/save') ?>" method="POST" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="name" class="form-label">Tên sản phẩm</label>
+                            <label for="name" class="form-label">Tên sản phẩm <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control <?php echo isset($errors['name']) ? 'is-invalid' : ''; ?>" 
                                        id="name" name="name" 
                                        value="<?php echo htmlspecialchars($form_data['name'] ?? ''); ?>"
@@ -39,7 +54,7 @@ unset($_SESSION['errors']);
 </div>
 
                             <div class="mb-3">
-                                <label for="description" class="form-label">Mô tả</label>
+                            <label for="description" class="form-label">Mô tả <span class="text-danger">*</span></label>
                                 <textarea class="form-control <?php echo isset($errors['description']) ? 'is-invalid' : ''; ?>" 
                                           id="description" name="description" 
                                           rows="3" required><?php echo htmlspecialchars($form_data['description'] ?? ''); ?></textarea>
@@ -50,21 +65,27 @@ unset($_SESSION['errors']);
                 <?php endif; ?>
                     </div>
                     
+                        <div class="row">
+                            <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="price" class="form-label">Giá</label>
+                                    <label for="price" class="form-label">Giá <span class="text-danger">*</span></label>
+                                    <div class="input-group">
                                 <input type="number" class="form-control <?php echo isset($errors['price']) ? 'is-invalid' : ''; ?>" 
                                        id="price" name="price" 
                                        value="<?php echo htmlspecialchars($form_data['price'] ?? ''); ?>"
                                        min="0" step="1000" required>
+                                        <span class="input-group-text">VNĐ</span>
+                                    </div>
                                 <?php if(isset($errors['price'])): ?>
                                     <div class="invalid-feedback">
                                         <?php echo $errors['price']; ?>
                     </div>
                                 <?php endif; ?>
                         </div>
-                        
+                            </div>
+                            <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="category_id" class="form-label">Danh mục</label>
+                                    <label for="category_id" class="form-label">Danh mục <span class="text-danger">*</span></label>
                                 <select class="form-select <?php echo isset($errors['category_id']) ? 'is-invalid' : ''; ?>" 
                                         id="category_id" name="category_id" required>
                                     <option value="">Chọn danh mục</option>
@@ -80,15 +101,23 @@ unset($_SESSION['errors']);
                                         <?php echo $errors['category_id']; ?>
                         </div>
                                 <?php endif; ?>
+                                </div>
+                            </div>
                     </div>
                     
-                            <div class="mb-3">
-                        <label for="image" class="form-label">Hình ảnh</label>
+                        <div class="mb-4">
+                            <label for="image" class="form-label">Hình ảnh sản phẩm</label>
                                 <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                            <div class="form-text">Chấp nhận file ảnh JPG, PNG, GIF (tối đa 2MB)</div>
                     </div>
                     
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary me-2">
+                                <i class="fas fa-save me-2"></i> Thêm sản phẩm
+                            </button>
+                            <a href="<?= UrlHelper::url('Product/list') ?>" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Quay lại
+                            </a>
                     </div>
                 </form>
             </div>
@@ -97,6 +126,4 @@ unset($_SESSION['errors']);
 </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<?php include_once 'app/views/layout/footer.php'; ?>

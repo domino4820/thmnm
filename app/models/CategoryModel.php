@@ -16,6 +16,31 @@ class CategoryModel
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        
+        // Add default image path if not specified
+        foreach ($result as $category) {
+            if (!isset($category->image)) {
+                if (stripos($category->name, 'Perfect Grade') !== false || stripos($category->name, 'PG') !== false) {
+                    $category->image = 'PG.jpg';
+                } 
+                else if (stripos($category->name, 'High Grade') !== false || stripos($category->name, 'HG') !== false) {
+                    $category->image = 'HG.jpg';
+                }
+                else if (stripos($category->name, 'SD') !== false) {
+                    $category->image = 'sd.jpg';
+                }
+                else if (stripos($category->name, 'Freedom Strike') !== false || stripos($category->name, 'Freedom') !== false) {
+                    $category->image = 'FREEDOM_STRVE.jpg';
+                }
+                else if (stripos($category->name, 'NMP') !== false) {
+                    $category->image = '68301e39bc8fa_818cXcaog9L.jpg';
+                }
+                else {
+                    $category->image = 'placeholder-category.jpg';
+                }
+            }
+        }
+        
         return $result;
     }
 
@@ -26,7 +51,33 @@ class CategoryModel
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_OBJ);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        
+        // Add default image if not specified
+        if ($result) {
+            if (!isset($result->image)) {
+                if (stripos($result->name, 'Perfect Grade') !== false || stripos($result->name, 'PG') !== false) {
+                    $result->image = 'PG.jpg';
+                } 
+                else if (stripos($result->name, 'High Grade') !== false || stripos($result->name, 'HG') !== false) {
+                    $result->image = 'HG.jpg';
+                }
+                else if (stripos($result->name, 'SD') !== false) {
+                    $result->image = 'sd.jpg';
+                }
+                else if (stripos($result->name, 'Freedom Strike') !== false || stripos($result->name, 'Freedom') !== false) {
+                    $result->image = 'FREEDOM_STRVE.jpg';
+                }
+                else if (stripos($result->name, 'NMP') !== false) {
+                    $result->image = '68301e39bc8fa_818cXcaog9L.jpg';
+                }
+                else {
+                    $result->image = 'placeholder-category.jpg';
+                }
+            }
+        }
+        
+        return $result;
     }
 
     // Create: Add new category

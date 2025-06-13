@@ -57,3 +57,86 @@
 [2025-05-23 08:55:32] Image uploaded successfully: public/uploads/products/683038040560f_bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg
 [2025-05-23 08:55:32] Adding Product - Name: Aries, Description: Aries huyền thoại, Price: 9000000, Category: 8, Image: uploads/products/683038040560f_bandai_1100_full_mechanics_xvx_1686139863_c33f0a0c_progressive.jpg
 [2025-05-23 08:57:33] Image uploaded successfully: public/uploads/products/6830387de2268_sg-11134201-7reo2-m84z84c3sejmb0.jpg
+[2025-05-30 07:03:46] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'order_date' in 'field list'
+[2025-05-30 07:09:12] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'customer_id' in 'field list'
+[2025-05-30 07:15:55] ProductController Error: Lỗi khi xử lý đơn hàng: Vui lòng điền đầy đủ thông tin
+[2025-05-30 07:16:04] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[HY000]: General error: 1364 Field 'name' doesn't have a default value
+[2025-05-30 07:19:43] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'customer_name' in 'field list'
+[2025-05-30 07:21:58] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[HY000]: General error: 1364 Field 'name' doesn't have a default value
+[2025-05-30 07:23:39] ProductController Error: Không tìm thấy chức năng
+[2025-05-30 07:27:29] ProductController Error: Không tìm thấy chức năng
+[2025-05-30 07:32:11] ProductController Error: Lỗi khi hiển thị trang xác nhận đơn hàng: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'my_store.products' doesn't exist
+[2025-05-30 07:35:26] ProductController Error: Lỗi khi hiển thị trang xác nhận đơn hàng: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'my_store.products' doesn't exist
+[2025-05-30 07:40:42] ProductController Error: Lỗi khi hiển thị trang xác nhận đơn hàng: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'my_store.products' doesn't exist
+[2025-05-30 07:49:29] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'product_name' in 'field list'
+[2025-05-30 08:05:35] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'product_name' in 'field list'
+[2025-05-30 08:07:10] ProductController Error: Lỗi khi xử lý đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'product_name' in 'field list'
+[2025-05-30 08:11:52] Giỏ hàng trước khi thanh toán: [{"product_id":"8","name":"RX-78-2 Gundam","price":"7000000.00","image":"uploads\/products\/68302d2798c14_rx-78-2.jpg","quantity":1}]
+[2025-05-30 08:11:52] Đơn hàng mới được tạo với ID: 9
+[2025-05-30 08:11:52] Thêm vào order_details: order_id=9, product_id=8, qty=1, price=7000000.00, name=RX-78-2 Gundam, image=uploads/products/68302d2798c14_rx-78-2.jpg
+[2025-05-30 08:11:52] Đơn hàng được xử lý thành công: 9
+[2025-05-30 08:12:38] Giỏ hàng trước khi thanh toán: [{"product_id":"8","name":"RX-78-2 Gundam","price":"7000000.00","image":"uploads\/products\/68302d2798c14_rx-78-2.jpg","quantity":1},{"product_id":"7","name":"Baradox","price":"1750000.00","image":"uploads\/products\/68302bcd5917e_barbatos.jpg","quantity":3}]
+[2025-05-30 08:12:38] Đơn hàng mới được tạo với ID: 10
+[2025-05-30 08:12:38] Thêm vào order_details: order_id=10, product_id=8, qty=1, price=7000000.00, name=RX-78-2 Gundam, image=uploads/products/68302d2798c14_rx-78-2.jpg
+[2025-05-30 08:12:38] Thêm vào order_details: order_id=10, product_id=7, qty=3, price=1750000.00, name=Baradox, image=uploads/products/68302bcd5917e_barbatos.jpg
+[2025-05-30 08:12:38] Đơn hàng được xử lý thành công: 10
+[2025-05-30 08:58:40] Giỏ hàng trước khi thanh toán: [{"product_id":"15","name":"Lone Shadow","price":"900000.00","image":"uploads\/products\/683037bb57683_Lone Shadow (4).jpg","quantity":3}]
+[2025-05-30 08:58:40] Đơn hàng mới được tạo với ID: 11
+[2025-05-30 08:58:40] Thêm vào order_details: order_id=11, product_id=15, qty=3, price=900000.00, name=Lone Shadow, image=uploads/products/683037bb57683_Lone Shadow (4).jpg
+[2025-05-30 08:58:40] Đơn hàng được xử lý thành công: 11
+[2025-05-30 09:05:30] Giỏ hàng trước khi thanh toán: [{"product_id":"15","name":"Lone Shadow","price":"900000.00","image":"uploads\/products\/683037bb57683_Lone Shadow (4).jpg","quantity":9}]
+[2025-05-30 09:05:30] Đơn hàng mới được tạo với ID: 12
+[2025-05-30 09:05:30] Thêm vào order_details: order_id=12, product_id=15, qty=9, price=900000.00, name=Lone Shadow, image=uploads/products/683037bb57683_Lone Shadow (4).jpg
+[2025-05-30 09:05:30] Đơn hàng được xử lý thành công: 12
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:31] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:32] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:32] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:10:33] ProductController Error: Lỗi khi tải danh sách sản phẩm: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+[2025-06-06 08:48:44] ProductController Error: Lỗi khi hiển thị lịch sử đơn hàng: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'o.user_id' in 'where clause'
+[2025-06-06 08:58:12] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 08:58:16] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:14:57] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:15:05] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:15:09] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:16:35] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:16:42] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:18:49] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:18:53] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:19:02] ProductController Error: Không tìm thấy chức năng
+[2025-06-06 09:19:26] ProductController Error: Không tìm thấy chức năng

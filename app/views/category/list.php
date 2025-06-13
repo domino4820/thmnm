@@ -19,65 +19,65 @@ if (isset($_SESSION['error']) && !empty($_SESSION['error'])) {
     unset($_SESSION['error']);
 }
 
-include_once 'app/views/layout/header.php'; 
+include 'app/views/layout/header.php'; 
 ?>
 
 <div class="container mt-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1>Danh mục sản phẩm</h1>
-                <a href="/Category/create" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> Thêm Danh Mục Mới
-                </a>
-            </div>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Danh Sách Danh Mục</h2>
+        <a href="<?= UrlHelper::url('Category/create') ?>" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i> Thêm Danh Mục Mới
+        </a>
+    </div>
 
-            <?php if ($SuccessMessage): ?>
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <?php echo htmlspecialchars($SuccessMessage); ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif; ?>
+    <?php if (isset($_SESSION['success'])): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $_SESSION['success'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['success']); ?>
+    <?php endif; ?>
 
-            <?php if ($ErrorMessage): ?>
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <?php echo htmlspecialchars($ErrorMessage); ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            <?php endif; ?>
+    <?php if (isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= $_SESSION['error'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
 
+    <div class="card shadow-sm">
+        <div class="card-body">
             <?php if (empty($categories)): ?>
-                <div class="alert alert-info text-center" role="alert">
-                    <i class="fas fa-info-circle"></i> Chưa có danh mục nào
+                <div class="alert alert-info">
+                    Chưa có danh mục nào. Hãy tạo danh mục mới.
                 </div>
             <?php else: ?>
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead class="table-primary">
+                    <table class="table table-hover">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Tên Danh Mục</th>
                                 <th>Mô Tả</th>
-                                <th class="text-center">Hành Động</th>
+                                <th>Thao Tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($categories as $category): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($category->id); ?></td>
-                                <td><?php echo htmlspecialchars($category->name); ?></td>
-                                <td><?php echo htmlspecialchars($category->description); ?></td>
-                                <td class="text-center">
-                                    <div class="btn-group" role="group">
-                                        <a href="/Category/edit/<?php echo $category->id; ?>" class="btn btn-sm btn-warning me-2">
+                                <tr>
+                                    <td><?= $category['category_id'] ?></td>
+                                    <td><?= htmlspecialchars($category['name']) ?></td>
+                                    <td><?= htmlspecialchars($category['description'] ?? 'Không có mô tả') ?></td>
+                                    <td>
+                                        <a href="<?= UrlHelper::url('Category/edit/' . $category['category_id']) ?>" class="btn btn-sm btn-primary">
                                             <i class="fas fa-edit"></i> Sửa
                                         </a>
-                                        <button onclick="confirmDelete(<?php echo $category->id; ?>)" class="btn btn-sm btn-danger">
+                                        <a href="<?= UrlHelper::url('Category/delete/' . $category['category_id']) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này?');">
                                             <i class="fas fa-trash"></i> Xóa
-                                        </button>
-                                    </div>
-                                </td>
-                            </tr>
+                                        </a>
+                                    </td>
+                                </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -87,34 +87,4 @@ include_once 'app/views/layout/header.php';
     </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="deleteModalLabel">Xác Nhận Xóa</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn xóa danh mục này không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <a href="#" id="deleteLink" class="btn btn-danger">Xóa</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-function confirmDelete(categoryId) {
-    const deleteLink = document.getElementById('deleteLink');
-    deleteLink.href = `/Category/delete/${categoryId}`;
-    
-    // Use Bootstrap's modal method to show the modal
-    var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    deleteModal.show();
-}
-</script>
-
-<?php include_once 'app/views/layout/footer.php'; ?>
+<?php include 'app/views/layout/footer.php'; ?>

@@ -1,0 +1,181 @@
+{"time":"2025-06-13 08:41:25","method":"GET","uri":"\/api.php\/products","query":[]}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:42:20","method":"GET","uri":"\/\/api.php\/categories","query":[]}
+Original URI: //api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:42:26","method":"GET","uri":"\/\/api.php\/categories\/6","query":[]}
+Original URI: //api.php/categories/6
+Processed URI: categories/6
+Resource: categories, ID: 6
+{"time":"2025-06-13 08:42:30","method":"GET","uri":"\/\/api.php\/categories\/6","query":[]}
+Original URI: //api.php/categories/6
+Processed URI: categories/6
+Resource: categories, ID: 6
+{"time":"2025-06-13 08:44:26","method":"GET","uri":"\/\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: //api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:44:26","method":"GET","uri":"\/\/api.php\/categories","query":[]}
+Original URI: //api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:45:57","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:45:58","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:45:58","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:46:44","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+ethod":"GET","uri":"\/api.php\/categories","query":[]}
+Processed URI: products
+Original URI: /api.php/categories
+Resource: products, ID: null
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:46:51","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:46:55","method":"GET","uri":"\/api.php\/categories","query":[]}
+=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/categories
+Processed URI: products
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:53:29","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:56:05","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:56:05","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:56:13","method":"GET","uri":"\/api.php\/products?limit=10&offset=10","query":{"limit":"10","offset":"10"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:56:15","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:56:23","method":"GET","uri":"\/api.php\/products\/15","query":[]}
+Original URI: /api.php/products/15
+Processed URI: products/15
+Resource: products, ID: 15
+{"time":"2025-06-13 08:58:05","method":"GET","uri":"\/api.php\/products","query":[]}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:58:20","method":"GET","uri":"\/api.php\/products\/1","query":[]}
+Original URI: /api.php/products/1
+Processed URI: products/1
+Resource: products, ID: 1
+{"time":"2025-06-13 08:58:24","method":"GET","uri":"\/api.php\/products\/17","query":[]}
+Original URI: /api.php/products/17
+Processed URI: products/17
+Resource: products, ID: 17
+{"time":"2025-06-13 08:59:14","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:59:14","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 08:59:18","method":"GET","uri":"\/api.php\/products\/18","query":[]}
+Original URI: /api.php/products/18
+Processed URI: products/18
+Resource: products, ID: 18
+{"time":"2025-06-13 08:59:19","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 08:59:21","method":"GET","uri":"\/api.php\/products\/18","query":[]}
+Original URI: /api.php/products/18
+Processed URI: products/18
+Resource: products, ID: 18
+{"time":"2025-06-13 08:59:21","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:00:18","method":"GET","uri":"\/api.php\/products\/18","query":[]}
+Original URI: /api.php/products/18
+Processed URI: products/18
+Resource: products, ID: 18
+{"time":"2025-06-13 09:00:18","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:00:36","method":"GET","uri":"\/api.php\/products?limit=10&offset=0&search=uni","query":{"limit":"10","offset":"0","search":"uni"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 09:00:40","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:00:40","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 09:00:46","method":"DELETE","uri":"\/api.php\/products\/18","query":[]}
+Original URI: /api.php/products/18
+Processed URI: products/18
+Resource: products, ID: 18
+{"time":"2025-06-13 09:00:47","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 09:00:49","method":"GET","uri":"\/api.php\/categories","query":[]}
+{"time":"2025-06-13 09:00:49","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/categories
+Original URI: /api.php/products
+Processed URI: categories
+Processed URI: products
+Resource: categories, ID: null
+{"time":"2025-06-13 09:01:07","method":"POST","uri":"\/api.php\/products","query":[]}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null
+{"time":"2025-06-13 09:01:13","method":"GET","uri":"\/api.php\/categories","query":[]}
+{"time":"2025-06-13 09:01:13","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/categories
+Original URI: /api.php/products
+Processed URI: products
+Processed URI: categories
+Resource: products, ID: null
+Resource: categories, ID: null
+{"time":"2025-06-13 09:02:07","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:04:08","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:05:51","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:05:59","method":"GET","uri":"\/api.php\/categories","query":[]}
+Original URI: /api.php/categories
+Processed URI: categories
+Resource: categories, ID: null
+{"time":"2025-06-13 09:05:59","method":"GET","uri":"\/api.php\/products?limit=10&offset=0","query":{"limit":"10","offset":"0"}}
+Original URI: /api.php/products
+Processed URI: products
+Resource: products, ID: null

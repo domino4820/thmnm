@@ -2,6 +2,8 @@
 // Require SessionHelper and other necessary files
 require_once('app/config/database.php');
 require_once('app/models/CategoryModel.php');
+require_once('app/helpers/SessionHelper.php');
+require_once('app/helpers/UrlHelper.php');
 
 class CategoryController
 {
@@ -20,6 +22,18 @@ class CategoryController
         // Check if session is not already active before starting
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
+        }
+
+        // 检查所有类别管理操作都需要管理员或员工权限
+        if ($action !== 'index' && $action !== 'list') {
+            // 这些操作需要产品管理权限
+            try {
+                SessionHelper::requireProductManager();
+            } catch (Exception $e) {
+                $_SESSION['error'] = "Bạn không có quyền thực hiện chức năng này";
+                header('Location: ' . UrlHelper::url(''));
+                exit();
+            }
         }
 
         switch ($action) {
@@ -41,7 +55,7 @@ class CategoryController
                     $this->edit($params[0]);
                 } else {
                     $_SESSION['error'] = "ID danh mục không hợp lệ";
-                    header('Location: /Category/list');
+                    header('Location: ' . UrlHelper::url('Category/list'));
                     exit();
                 }
                 break;
@@ -51,7 +65,7 @@ class CategoryController
                     $this->update($params[0]);
                 } else {
                     $_SESSION['error'] = "ID danh mục không hợp lệ";
-                    header('Location: /Category/list');
+                    header('Location: ' . UrlHelper::url('Category/list'));
                     exit();
                 }
                 break;
@@ -61,14 +75,14 @@ class CategoryController
                     $this->delete($params[0]);
                 } else {
                     $_SESSION['error'] = "ID danh mục không hợp lệ";
-                    header('Location: /Category/list');
+                    header('Location: ' . UrlHelper::url('Category/list'));
                     exit();
                 }
                 break;
             default:
                 // If no matching action is found
                 $_SESSION['error'] = "Chức năng không tồn tại";
-                header('Location: /Category/list');
+                header('Location: ' . UrlHelper::url('Category/list'));
                 exit();
         }
     }
@@ -95,7 +109,7 @@ class CategoryController
 
             if (empty($name)) {
                 $_SESSION['error'] = "Tên danh mục không được để trống";
-                header('Location: /Category/create');
+                header('Location: ' . UrlHelper::url('Category/create'));
                 exit();
             }
 
@@ -103,11 +117,11 @@ class CategoryController
 
             if ($result) {
                 $_SESSION['success'] = "Danh mục đã được tạo thành công";
-                header('Location: /Category/list');
+                header('Location: ' . UrlHelper::url('Category/list'));
                 exit();
             } else {
                 $_SESSION['error'] = "Không thể tạo danh mục";
-                header('Location: /Category/create');
+                header('Location: ' . UrlHelper::url('Category/create'));
                 exit();
             }
         }
@@ -120,7 +134,7 @@ class CategoryController
 
         if (!$category) {
             $_SESSION['error'] = "Danh mục không tồn tại";
-            header('Location: /Category/list');
+            header('Location: ' . UrlHelper::url('Category/list'));
             exit();
         }
 
@@ -136,7 +150,7 @@ class CategoryController
 
             if (empty($name)) {
                 $_SESSION['error'] = "Tên danh mục không được để trống";
-                header("Location: /Category/edit/{$id}");
+                header('Location: ' . UrlHelper::url('Category/edit/' . $id));
                 exit();
             }
 
@@ -144,11 +158,11 @@ class CategoryController
 
             if ($result) {
                 $_SESSION['success'] = "Danh mục đã được cập nhật thành công";
-                header('Location: /Category/list');
+                header('Location: ' . UrlHelper::url('Category/list'));
                 exit();
             } else {
                 $_SESSION['error'] = "Không thể cập nhật danh mục";
-                header("Location: /Category/edit/{$id}");
+                header('Location: ' . UrlHelper::url('Category/edit/' . $id));
                 exit();
             }
         }
@@ -165,7 +179,7 @@ class CategoryController
             $_SESSION['error'] = "Không thể xóa danh mục";
         }
 
-        header('Location: /Category/list');
+        header('Location: ' . UrlHelper::url('Category/list'));
         exit();
     }
 } 
